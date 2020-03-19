@@ -17,17 +17,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     player: {
       type: DataTypes.JSON,
-      validate: {
-        maxSixPlayer: (player) => {
-          if (Object.keys(player).length > 6) {
-            throw new Error('Maksimum 6 Player')
-          }
-        }
-      }
+      // validate: {
+      //   maxSixPlayer: (player) => {
+      //     if (Object.keys(player).length > 6) {
+      //       throw new Error('Maksimum 6 Player')
+      //     }
+      //   }
+      // }
     },
-    room_code: {
-      type: DataTypes.STRING
-    }
+    room_code: DataTypes.STRING
   }, {
     sequelize
   })

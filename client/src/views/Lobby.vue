@@ -42,9 +42,6 @@ export default {
         this.$store.commit("resetState");
         this.socketListener();
     },
-    mounted() {
-        this.socketListener();
-    },
     data() {
         return {
             room_code: "",
@@ -68,13 +65,11 @@ export default {
             this.socket.emit("createRoom", payload);
         },
         socketListener() {
-            console.log("bisa ini mah");
-            this.$store.state.socket.on("gotoRoom", function(data) {
-                console.log(data);
+            this.socket.on("gotoRoom", data => {
                 if (data.isCreator) {
                     this.$store.commit("setIsCreator", true);
                 }
-                console.log(data);
+                console.log("yang ini");
                 this.$store.commit("setMyKey", data.playerKey);
                 this.$store.commit("setRoomName", data.name);
                 this.$store.commit("setOtherPlayers", data.player);

@@ -12,15 +12,13 @@ io.on('connection', function (socket) {
         RoomController.createRoom(data_room, function (err, result) {
             if (!err) {
                 socket.join(result.name)
-                console.log('masuktidakerr')
                 socket.emit('gotoRoom', {
                     ...result,
                     playerKey: `1-${data_room.roomMaster}`,
                     isCreator: true
                 })
             } else {
-                // console.log('masukerr')
-                // socket.emit('shootError', err)
+                socket.emit('shootError', err)
             }
         })
     })

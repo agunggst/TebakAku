@@ -41,7 +41,7 @@ export default new Vuex.Store({
       state.score = data
     },
     setOtherPlayers(state, data) {
-      delete payload[state.myKey]
+      delete data[state.myKey]
       state.otherPlayers = data
     }
   },
