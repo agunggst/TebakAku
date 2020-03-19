@@ -3,6 +3,7 @@ const {
 } = require('../models')
 const kue = require('kue')
 const queue = kue.createQueue()
+const roomCoder = require('../helpers/roomCoder')
 
 queue.process('joinRoom', (job, done) => {
     const {
@@ -49,7 +50,8 @@ class RoomController {
             name: roomData.name,
             player: {
                 [`1-${roomData.roomMaster}`]: 0
-            }
+            },
+            room_code: roomCoder(8)
         }
 
         Room.create(data_room)
