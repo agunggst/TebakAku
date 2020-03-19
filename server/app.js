@@ -22,4 +22,4 @@ const server = app.listen(port, () => {
 
 const io = socket(server)
 
-module.exports = io;
+module.exports = io

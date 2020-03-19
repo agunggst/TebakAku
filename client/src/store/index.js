@@ -13,6 +13,7 @@ export default new Vuex.Store({
       state.myName = data
     },
     setSocket(state, data) {
+      console.log(data)
       state.socket = data
     },
   },

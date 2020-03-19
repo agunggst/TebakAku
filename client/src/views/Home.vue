@@ -26,9 +26,11 @@ export default {
   methods: {
     ...mapMutations(['setSocket', 'setMyName']),
     start() {
+      console.log('start')
       this.setMyName(this.playerName);
       if(this.$store.state.socket === null){
         let socket = io('http://localhost:3000');
+        console.log(socket, '<< ini socket')
         this.setSocket(socket);
       }
       localStorage.setItem('name', this.playerName)
