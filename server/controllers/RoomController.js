@@ -56,9 +56,11 @@ class RoomController {
 
         Room.create(data_room)
             .then(result => {
+                console.log('1')
                 callback(null, result)
             })
             .catch(err => {
+                console.log(err)
                 callback({
                     status_code: 400,
                     message: 'Failed Creating Room'
@@ -97,10 +99,7 @@ class RoomController {
                 message: 'Success Joining Room'
             })
         }).on('failed', (err_msg) => {
-            callback({
-                status_code: 400,
-                message: 'Failed Joining Room'
-            }, null)
+            callback(err_msg, null)
         })
     }
 

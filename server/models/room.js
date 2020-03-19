@@ -5,15 +5,15 @@ module.exports = (sequelize, DataTypes) => {
   Room.init({
     name: {
       type: DataTypes.STRING,
-      validate: {
-        notEmpty: {
-          msg: "Nama Room Tidak Boleh Kosong"
-        },
-        len: {
-          args: [4, 12],
-          msg: "Nama Room Harus 4 Sampai 12 Character"
-        }
-      }
+      // validate: {
+      //   notEmpty: {
+      //     msg: "Nama Room Tidak Boleh Kosong"
+      //   },
+      //   len: {
+      //     args: [4, 12],
+      //     msg: "Nama Room Harus 4 Sampai 12 Character"
+      //   }
+      // }
     },
     player: {
       type: DataTypes.JSON,
