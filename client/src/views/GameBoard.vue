@@ -1,5 +1,6 @@
 <template>
-  <div class="about">
+  <div class="gameboard">
+    <h1>-TebakAku-</h1>
     <RoomMaster />
   </div>
 </template>
@@ -9,7 +10,7 @@
 import RoomMaster from '@/components/RoomMaster.vue'
 
 export default {
-  name: 'Home',
+  name: 'gameboard',
   components: {
     RoomMaster
   }
