@@ -1,5 +1,17 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <RoomMaster />
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import RoomMaster from '@/components/RoomMaster.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    RoomMaster
+  }
+}
+</script>
