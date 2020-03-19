@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Lobby from '../views/Lobby.vue'
 import GameBoard from '../views/GameBoard.vue'
+import TestPlayer from '../views/testPlayerPage.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,13 @@ const routes = [{
     path: '/lobby',
     name: 'Lobby',
     component: Lobby,
+    path: '/testplayer',
+    name: 'test',
+    component: TestPlayer
+  },
+  {
+    path: '/about',
+    name: 'About',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
