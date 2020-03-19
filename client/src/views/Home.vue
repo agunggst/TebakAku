@@ -1,18 +1,41 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>TebakAku</h1>
+    <form @submit.prevent="start">
+      <input type="text" placeholder="Enter your name" v-model="playerName">
+      <button type="submit" :disabled="playerName === ''">Let's Go!</button>
+    </form>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapMutations } from 'vuex';
+import io from 'socket.io-client';
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+  },
+  data() {
+    return {
+      playerName: '',
+    };
+  },
+  computed: {
+  },
+  methods: {
+    ...mapMutations(['setSocket', 'setMyName']),
+    start() {
+      console.log('start')
+      this.setMyName(this.playerName);
+      if(this.$store.state.socket === null){
+        let socket = io('http://localhost:3000');
+        console.log(socket, '<< ini socket')
+        this.setSocket(socket);
+      }
+      localStorage.setItem('name', this.playerName)
+      this.$router.push('/lobby')
+    }
   }
 }
 </script>
