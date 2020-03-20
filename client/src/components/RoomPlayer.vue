@@ -14,7 +14,7 @@
                     </p>
                 </div>
             </div>
-            <div v-if="!$store.state.isCreator">
+            <div v-if="!$store.state.isCreator && isPlaying" >
                 <form @submit.prevent="sendMessage">
                     <div
                         id="submitplayer"
@@ -40,6 +40,7 @@
 <script>
 export default {
     name: 'roomplayer',
+    props : ['isPlaying'],
     data() {
         return {
             messages: [{player: 'Tebakan', message: 'silakan tebak'}],

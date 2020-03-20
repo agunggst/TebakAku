@@ -39,4 +39,8 @@ io.on('connection', function (socket) {
     socket.on('newClue', (clue) => {
         socket.broadcast.emit('newClue', clue)
     })
+
+    socket.on('changeIsPlaying', (payload) => {
+        io.to(payload.roomName).emit('changeIsPlaying', payload)
+    })
 })
