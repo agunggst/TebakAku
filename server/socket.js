@@ -43,4 +43,8 @@ io.on('connection', function (socket) {
     socket.on('changeIsPlaying', (payload) => {
         io.to(payload.roomName).emit('changeIsPlaying', payload)
     })
+
+    socket.on('sendAnswer', (payload) => {
+        socket.broadcast.emit('sendAnswer', payload)
+    } )
 })

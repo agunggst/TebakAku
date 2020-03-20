@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div v-if="!$store.state.isCreator && isPlaying" >
-                <form @submit.prevent="sendMessage">
+                <form @submit.prevent="sendAnswer">
                     <div
                         id="submitplayer"
                         class="form-group border border-dark mt-2 ml-3"
@@ -38,24 +38,39 @@
 </template>
 
 <script>
+import {mapState, mapMutations} from 'vuex' 
 export default {
     name: 'roomplayer',
     props : ['isPlaying'],
     data() {
         return {
-            messages: [{player: 'Tebakan', message: 'silakan tebak'}],
-            player: '',
+            messages: [],
+            player: this.myName,
             message: ''
         };
     },
+    computed: {
+        ...mapState(['myName', 'socket'])
+    },
+    created () {
+        this.socketListener() 
+    },
     methods: {
-        sendTebakan(event) {
-            event.preventDefault();
-            const message = {
-                player: this.player,
+        sendAnswer() {
+            //console.log(this.player)
+            const payload = {
+                player: this.$store.state.myName,
                 message: this.message
             };
-            console.log(message);
+            this.messages.push(payload)
+            //this.$emit('checkAnswer', this.message)
+            this.socket.emit('sendAnswer', payload )
+            //console.log(message);
+        },
+        socketListener() {
+            this.socket.on('sendAnswer', (payload) => {
+                this.messages.push(payload)
+            })
         }
     }
 };
