@@ -5,29 +5,27 @@ module.exports = (sequelize, DataTypes) => {
   Room.init({
     name: {
       type: DataTypes.STRING,
-      validate: {
-        notEmpty: {
-          msg: "Nama Room Tidak Boleh Kosong"
-        },
-        len: {
-          args: [4, 12],
-          msg: "Nama Room Harus 4 Sampai 12 Character"
-        }
-      }
+      // validate: {
+      //   notEmpty: {
+      //     msg: "Nama Room Tidak Boleh Kosong"
+      //   },
+      //   len: {
+      //     args: [4, 12],
+      //     msg: "Nama Room Harus 4 Sampai 12 Character"
+      //   }
+      // }
     },
     player: {
       type: DataTypes.JSON,
-      validate: {
-        maxSixPlayer: (player) => {
-          if (Object.keys(player).length > 6) {
-            throw new Error('Maksimum 6 Player')
-          }
-        }
-      }
+      // validate: {
+      //   maxSixPlayer: (player) => {
+      //     if (Object.keys(player).length > 6) {
+      //       throw new Error('Maksimum 6 Player')
+      //     }
+      //   }
+      // }
     },
-    room_code: {
-      type: DataTypes.STRING
-    }
+    room_code: DataTypes.STRING
   }, {
     sequelize
   })
