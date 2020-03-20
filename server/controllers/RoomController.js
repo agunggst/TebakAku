@@ -15,11 +15,9 @@ class RoomController {
 
         Room.create(data_room)
             .then(result => {
-                console.log('1');
                 callback(null, result.dataValues);
             })
             .catch(err => {
-                console.log(err);
                 callback({
                         status_code: 400,
                         message: 'Failed Creating Room'
@@ -81,7 +79,6 @@ class RoomController {
                 });
             })
             .catch(err => {
-                console.log(err)
                 callback(err, null);
             });
     }
@@ -108,7 +105,6 @@ class RoomController {
                 }
             })
             .then(result => {
-                console.log(result);
                 callback(null, result.dataValues);
             })
             .catch(err => {

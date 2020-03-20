@@ -4,17 +4,23 @@
             <div id="judulplayer">
                 <h1 style="text-align:center" class="mt-2">Room - Pemain</h1>
             </div>
-            <div id="textplayer" class="border border-dark mx-3 my-1">
+            <div
+                id="textplayer"
+                class="border border-dark mx-3 my-1 chatMaster"
+            >
                 <div>
                     <h3 class="mt-2">Tebakan</h3>
                 </div>
                 <div class="col-sm-8">
                     <p v-for="(message, i) in messages" :key="i">
-                        <span>{{ message.player }}:{{ message.message }}</span>
+                        <span>{{ message.player }}: {{ message.message }}</span>
                     </p>
                 </div>
             </div>
-            <div v-if="!$store.state.isCreator && isPlaying">
+            <div
+                v-if="!$store.state.isCreator && isPlaying"
+                class="input-answer"
+            >
                 <form @submit.prevent="sendAnswer">
                     <div
                         id="submitplayer"

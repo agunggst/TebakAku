@@ -4,13 +4,17 @@
         <div class="room-code">
             <p>Room Code: {{ room_code }}</p>
         </div>
-        <div class="guess-word-input" v-if="!$store.state.isCreator">
+        <div class="guess-word-input" v-if="$store.state.isCreator">
             <form v-on:submit.prevent="setSecretWord">
-                <input type="text" v-model="secret_word_input" placeholder="Input the secret word" />
+                <input
+                    type="text"
+                    v-model="secret_word_input"
+                    placeholder="Input the secret word"
+                />
                 <button type="submit">Set</button>
             </form>
         </div>
-        <div class="guess-word" v-if="!$store.state.isCreator">
+        <div class="guess-word" v-if="$store.state.isCreator">
             <p>Guess Word: {{ secret_word }}</p>
         </div>
         <!-- <div class="players-list">
@@ -26,7 +30,7 @@
             ></RoomPlayer>
         </div>
         <div class="button-leave">
-            <button class="btn btn-primary" v-on:click="leaveRoom">
+            <button class="button-leave" v-on:click="leaveRoom">
                 Leave Room
             </button>
         </div>

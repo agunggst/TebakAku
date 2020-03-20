@@ -4,7 +4,10 @@
             <div id="judulmaster">
                 <h1 style="text-align:center" class="mt-2">Room Master</h1>
             </div>
-            <div id="textmaster" class="border border-dark mx-3 my-1">
+            <div
+                id="textmaster"
+                class="border border-dark mx-3 my-1 chatMaster"
+            >
                 <div>
                     <h3 class="mt-2">Clue</h3>
                 </div>
@@ -17,7 +20,7 @@
                     </p>
                 </div>
             </div>
-            <div v-if="!$store.state.isCreator">
+            <div v-if="$store.state.isCreator" class="input-clue">
                 <form @submit.prevent="sendClue">
                     <div
                         id="submitmaster"
