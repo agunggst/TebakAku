@@ -77,10 +77,17 @@ export default {
                 this.isGameEnded = true;
                 if (this.isWinning) {
                     console.log('you are the WINNER!');
+                    this.$myswal.showMessage('you are the WINNER!');
                 } else if (this.$store.state.isCreator) {
                     console.log(`game is ended, the winner is ${winner}`);
+                    this.$myswal.showMessage(
+                        `game is ended, the winner is ${winner}`
+                    );
                 } else {
                     console.log(`sorry you are lost, the winner is ${winner}`);
+                    this.$myswal.showMessage(
+                        `sorry you are lost, the winner is ${winner}`
+                    );
                 }
             });
             this.socket.on('playerLeave', player => {
@@ -100,6 +107,9 @@ export default {
         leaveRoom() {
             if (this.$store.state.isCreator && !this.isGameEnded) {
                 console.log(
+                    'Game master Cannot leave while game is still on going'
+                );
+                this.$myswal.showError(
                     'Game master Cannot leave while game is still on going'
                 );
             } else {

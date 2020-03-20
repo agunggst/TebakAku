@@ -72,7 +72,7 @@ export default {
                 message: this.message
             };
             if (clue.message == this.secret_word) {
-                console.log('GA BOLEH KASIH TAU');
+                this.$myswal.showMessage('GA BOLEH KASIH TAU');
             } else {
                 this.messages.push(clue);
                 this.message = '';

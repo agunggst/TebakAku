@@ -61,7 +61,6 @@ export default {
                 playerName: this.$store.state.myName,
                 room_code: this.room_code
             };
-            console.log('masuk join');
             this.socket.emit('joinRoom', payload);
         },
         createRoom() {
@@ -76,13 +75,16 @@ export default {
                 if (data.isCreator) {
                     this.$store.commit('setIsCreator', true);
                 }
-                console.log(data.player);
                 this.$store.commit('setMyKey', data.playerKey);
                 this.$store.commit('setRoomName', data.name);
                 this.$store.commit('setOtherPlayers', data.player);
                 this.$store.commit('setScore', 0);
                 this.$store.commit('setRoomCode', data.room_code);
                 this.$router.push('/gameboard');
+            });
+
+            this.socket.on('shootError', message => {
+                this.$myswal.showError(message);
             });
         }
     },

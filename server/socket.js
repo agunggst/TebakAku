@@ -31,7 +31,7 @@ io.on('connection', function (socket) {
                 console.log(result, 'ini result dari socket')
                 socket.emit('gotoRoom', result)
             } else {
-                socket.emit('shootError', err)
+                socket.emit('shootError', err.message)
             }
         })
     })
