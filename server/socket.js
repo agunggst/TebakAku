@@ -47,4 +47,8 @@ io.on('connection', function (socket) {
     socket.on('sendAnswer', (payload) => {
         socket.broadcast.emit('sendAnswer', payload)
     } )
+
+    socket.on('endGame', (payload)=> {
+        io.to(payload.roomName).emit('endGame', payload.winner)
+    })
 })

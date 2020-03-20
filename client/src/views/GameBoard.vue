@@ -19,7 +19,7 @@
         <div class="guess-word-player" v-if="!$store.state.isCreator"></div>
         <div class="room-box d-flex justify-center">
             <RoomMaster v-bind:secret_word="secret_word"></RoomMaster>
-            <RoomPlayer v-bind:secret_word="secret_word" :isPlaying="isPlaying"></RoomPlayer>
+            <RoomPlayer v-bind:secret_word="secret_word" :isPlaying="isPlaying" @checkAnswer="checkAnswer"></RoomPlayer>
         </div>
     </div>
 </template>
@@ -63,8 +63,28 @@ export default {
             this.isPlaying = data.isPlaying
             this.secret_word = data.secret_word
           })
+          this.socket.on('endGame', winner => {
+            this.isPlaying = false
+            this.isGameEnded = true
+            if(this.isWinning){
+                console.log('you are the WINNER!')
+            } else if (this.$store.state.isCreator){
+                console.log(`game is ended, the winner is ${winner}`)
+            } else {
+                console.log(`sorry you are lost, the winner is ${winner}`)
+            }
+          })
         },
-        
+        checkAnswer(answer) {
+            if(answer == this.secret_word){
+                this.isWinning = true
+                let payload = {
+                    roomName: this.roomName,
+                    winner: this.$store.state.myName
+                }
+                this.socket.emit('endGame', payload)
+            }
+        }
 
     },
     computed: {

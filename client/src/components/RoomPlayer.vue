@@ -63,7 +63,7 @@ export default {
                 message: this.message
             };
             this.messages.push(payload)
-            //this.$emit('checkAnswer', this.message)
+            this.$emit('checkAnswer', this.message)
             this.socket.emit('sendAnswer', payload )
             //console.log(message);
         },
