@@ -1,23 +1,23 @@
 <template>
     <div class="gameboard">
-        <h1>-TebakAku-</h1>
+        <!-- <h1>TebakAku</h1> -->
         <div class="room-code">
             <p>Room Code: {{ room_code }}</p>
         </div>
-        <div class="guess-word-input" v-if="$store.state.isCreator">
+        <div class="guess-word-input" v-if="!$store.state.isCreator">
             <form v-on:submit.prevent="setSecretWord">
-                <input type="text" v-model="secret_word_input" />
+                <input type="text" v-model="secret_word_input" placeholder="Input the secret word" />
                 <button type="submit">Set</button>
             </form>
         </div>
-        <div class="guess-word" v-if="$store.state.isCreator">
+        <div class="guess-word" v-if="!$store.state.isCreator">
             <p>Guess Word: {{ secret_word }}</p>
         </div>
         <!-- <div class="players-list">
             {{ otherPlayers }}
         </div> -->
         <div class="guess-word-player" v-if="!$store.state.isCreator"></div>
-        <div class="room-box d-flex">
+        <div class="chatbox">
             <RoomMaster v-bind:secret_word="secret_word"></RoomMaster>
             <RoomPlayer
                 v-bind:secret_word="secret_word"

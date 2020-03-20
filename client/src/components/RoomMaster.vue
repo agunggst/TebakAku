@@ -1,5 +1,5 @@
 <template>
-    <div id="formmaster" class="container">
+    <div id="formmaster" class="form-master">
         <div id="chatmaster" class="row border border-dark">
             <div id="judulmaster">
                 <h1 style="text-align:center" class="mt-2">Room Master</h1>
@@ -17,7 +17,7 @@
                     </p>
                 </div>
             </div>
-            <div v-if="$store.state.isCreator">
+            <div v-if="!$store.state.isCreator">
                 <form @submit.prevent="sendClue">
                     <div
                         id="submitmaster"

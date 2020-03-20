@@ -1,5 +1,5 @@
 <template>
-    <div id="roomplayer" class="container">
+    <div id="roomplayer" class="form-player">
         <div id="chatplayer" class="row border border-dark">
             <div id="judulplayer">
                 <h1 style="text-align:center" class="mt-2">Room - Pemain</h1>
