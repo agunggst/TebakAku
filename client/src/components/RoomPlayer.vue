@@ -4,10 +4,7 @@
             <div id="judulplayer">
                 <h1 style="text-align:center" class="mt-2">Room - Pemain</h1>
             </div>
-            <div
-                id="textplayer"
-                class="border border-dark mx-3 my-1 chatMaster"
-            >
+            <div id="textplayer" class="border border-dark mx-3 my-1 chatMaster">
                 <div>
                     <h3 class="mt-2">Tebakan</h3>
                 </div>
@@ -17,15 +14,9 @@
                     </p>
                 </div>
             </div>
-            <div
-                v-if="!$store.state.isCreator && isPlaying"
-                class="input-answer"
-            >
+            <div v-if="!$store.state.isCreator && isPlaying" class="input-answer">
                 <form @submit.prevent="sendAnswer">
-                    <div
-                        id="submitplayer"
-                        class="form-group border border-dark mt-2 ml-3"
-                    >
+                    <div id="submitplayer" class="form-group border border-dark mt-2 ml-3">
                         <label>Tebakan</label>
                         <input
                             type="text"
@@ -34,9 +25,7 @@
                             v-model="message"
                         />
                     </div>
-                    <button type="submit" class="btn btn-primary mb-3">
-                        Submit
-                    </button>
+                    <button type="submit" class="btn btn-primary mb-3">Submit</button>
                 </form>
             </div>
         </div>
@@ -44,19 +33,19 @@
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex';
+import { mapState, mapMutations } from "vuex";
 export default {
-    name: 'roomplayer',
-    props: ['isPlaying'],
+    name: "roomplayer",
+    props: ["isPlaying"],
     data() {
         return {
             messages: [],
             player: this.myName,
-            message: ''
+            message: ""
         };
     },
     computed: {
-        ...mapState(['myName', 'socket'])
+        ...mapState(["myName", "socket"])
     },
     created() {
         this.socketListener();
@@ -68,11 +57,12 @@ export default {
                 message: this.message
             };
             this.messages.push(payload);
-            this.$emit('checkAnswer', this.message);
-            this.socket.emit('sendAnswer', payload);
+            this.$emit("checkAnswer", this.message);
+            this.socket.emit("sendAnswer", payload);
+            // this.message = "";
         },
         socketListener() {
-            this.socket.on('sendAnswer', payload => {
+            this.socket.on("sendAnswer", payload => {
                 this.messages.push(payload);
             });
         }
