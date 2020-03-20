@@ -19,7 +19,7 @@
         <div class="guess-word-player" v-if="!$store.state.isCreator"></div>
         <div class="room-box d-flex justify-center">
             <RoomMaster v-bind:secret_word="secret_word"></RoomMaster>
-            <RoomPlayer></RoomPlayer>
+            <RoomPlayer v-bind:secret_word="secret_word" :isPlaying="isPlaying"></RoomPlayer>
         </div>
     </div>
 </template>
@@ -36,7 +36,10 @@ export default {
         return {
             secret_word: '',
             placeholder: '',
-            secret_word_input: ''
+            secret_word_input: '',
+            isPlaying: false,
+            isWinning: false,
+            isGameEnded: false
         };
     },
     components: {
@@ -48,10 +51,27 @@ export default {
             this.secret_word = this.secret_word_input;
             this.placeholder = '';
             this.secret_word_input = '';
-        }
+            let payload = {
+              roomName : this.roomName,
+              isPlaying : true,
+              secret_word : this.secret_word
+              }
+            this.socket.emit('changeIsPlaying', payload)
+        },
+        socketlistener() {
+          this.socket.on("changeIsPlaying", data => {
+            this.isPlaying = data.isPlaying
+            this.secret_word = data.secret_word
+          })
+        },
+        
+
     },
     computed: {
-        ...mapState(['room_code', 'socket', 'myName', 'otherPlayers'])
+        ...mapState(['room_code', 'socket', 'myName', 'otherPlayers', 'roomName'])
+    },
+    created () {
+      this.socketlistener()
     }
 };
 </script>
