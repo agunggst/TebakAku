@@ -17,9 +17,18 @@
             {{ otherPlayers }}
         </div> -->
         <div class="guess-word-player" v-if="!$store.state.isCreator"></div>
-        <div class="room-box d-flex justify-center">
+        <div class="room-box d-flex">
             <RoomMaster v-bind:secret_word="secret_word"></RoomMaster>
-            <RoomPlayer v-bind:secret_word="secret_word" :isPlaying="isPlaying" @checkAnswer="checkAnswer"></RoomPlayer>
+            <RoomPlayer
+                v-bind:secret_word="secret_word"
+                :isPlaying="isPlaying"
+                @checkAnswer="checkAnswer"
+            ></RoomPlayer>
+        </div>
+        <div class="button-leave">
+            <button class="btn btn-primary" v-on:click="leaveRoom">
+                Leave Room
+            </button>
         </div>
     </div>
 </template>
@@ -52,46 +61,74 @@ export default {
             this.placeholder = '';
             this.secret_word_input = '';
             let payload = {
-              roomName : this.roomName,
-              isPlaying : true,
-              secret_word : this.secret_word
-              }
-            this.socket.emit('changeIsPlaying', payload)
+                roomName: this.roomName,
+                isPlaying: true,
+                secret_word: this.secret_word
+            };
+            this.socket.emit('changeIsPlaying', payload);
         },
         socketlistener() {
-          this.socket.on("changeIsPlaying", data => {
-            this.isPlaying = data.isPlaying
-            this.secret_word = data.secret_word
-          })
-          this.socket.on('endGame', winner => {
-            this.isPlaying = false
-            this.isGameEnded = true
-            if(this.isWinning){
-                console.log('you are the WINNER!')
-            } else if (this.$store.state.isCreator){
-                console.log(`game is ended, the winner is ${winner}`)
-            } else {
-                console.log(`sorry you are lost, the winner is ${winner}`)
-            }
-          })
+            this.socket.on('changeIsPlaying', data => {
+                this.isPlaying = data.isPlaying;
+                this.secret_word = data.secret_word;
+            });
+            this.socket.on('endGame', winner => {
+                this.isPlaying = false;
+                this.isGameEnded = true;
+                if (this.isWinning) {
+                    console.log('you are the WINNER!');
+                } else if (this.$store.state.isCreator) {
+                    console.log(`game is ended, the winner is ${winner}`);
+                } else {
+                    console.log(`sorry you are lost, the winner is ${winner}`);
+                }
+            });
+            this.socket.on('playerLeave', player => {
+                this.$store.commit('setOtherPlayers', player);
+            });
         },
         checkAnswer(answer) {
-            if(answer == this.secret_word){
-                this.isWinning = true
+            if (answer == this.secret_word) {
+                this.isWinning = true;
                 let payload = {
                     roomName: this.roomName,
                     winner: this.$store.state.myName
-                }
-                this.socket.emit('endGame', payload)
+                };
+                this.socket.emit('endGame', payload);
+            }
+        },
+        leaveRoom() {
+            if (this.$store.state.isCreator && !this.isGameEnded) {
+                console.log(
+                    'Game master Cannot leave while game is still on going'
+                );
+            } else {
+                localStorage.removeItem('name');
+                this.socket.emit('leaveRoom', {
+                    roomName: this.roomName,
+                    room_code: this.room_code,
+                    playerKey: this.$store.state.myKey
+                });
+                this.$router.push('/');
             }
         }
-
     },
     computed: {
-        ...mapState(['room_code', 'socket', 'myName', 'otherPlayers', 'roomName'])
+        ...mapState([
+            'room_code',
+            'socket',
+            'myName',
+            'otherPlayers',
+            'roomName'
+        ])
     },
-    created () {
-      this.socketlistener()
+    created() {
+        this.socketlistener();
+    },
+    destroyed() {
+        this.socket.off('changeIsPlaying');
+        this.socket.off('endGame');
+        this.socket.off('playerLeave');
     }
 };
 </script>

@@ -46,9 +46,17 @@ io.on('connection', function (socket) {
 
     socket.on('sendAnswer', (payload) => {
         socket.broadcast.emit('sendAnswer', payload)
-    } )
+    })
 
-    socket.on('endGame', (payload)=> {
+    socket.on('endGame', (payload) => {
         io.to(payload.roomName).emit('endGame', payload.winner)
     })
+
+    socket.on('leaveRoom', (payload) => {
+        socket.leave(payload.roomName)
+        RoomController.leaveRoom(payload, (result) => {
+            io.to(payload.roomName).emit('playerLeave', result.player)
+        })
+    })
+
 })
