@@ -1,0 +1,36 @@
+@font-face{
+    font-family: "gotham";
+    src: url(./font/Gotham-Book.otf);
+    font-weight: normal;
+}
+@font-face{
+    font-family: "gotham";
+    src: url(./font/Gotham-Medium.otf);
+    font-weight: 500;
+}
+@font-face{
+    font-family: "montserrat";
+    src: url(./font/montserrat.regular.ttf);
+    font-weight: 400;
+}
+
+body {
+    margin: 0;
+    font-family: gotham;
+    min-height: 100vh;
+}
+.home{
+    text-align: center; display: flex; justify-content: center; align-items: center; height: 100vh;
+    background-color: #3f96cc;
+}
+.home h1{
+    font-size: 80px; color: whitesmoke
+}
+
+.home input{
+    width: 300px; height: 40px; font-size: 23px; margin-right: 20px; padding: 15px 15px; border-radius: 10px;
+}
+.home button{
+    width: 200px; height: 70px; font-size: 23px; padding: 15px 15px; background-color: #ffc524; color: whitesmoke;
+    font-weight: 500; border-radius: 10px;
+}

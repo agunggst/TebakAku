@@ -1,16 +1,18 @@
 <template>
     <div class="home">
-        <h1>TebakAku</h1>
-        <form @submit.prevent="start">
-            <input
-                type="text"
-                placeholder="Enter your name"
-                v-model="playerName"
-            />
-            <button type="submit" :disabled="playerName === ''">
-                Let's Go!
-            </button>
-        </form>
+        <div>
+            <h1>TebakAku</h1>
+            <form @submit.prevent="start">
+                <input
+                    type="text"
+                    placeholder="Enter your name"
+                    v-model="playerName"
+                />
+                <button type="submit" :disabled="playerName === ''">
+                    Let's Go!
+                </button>
+            </form>
+        </div>
     </div>
 </template>
 
