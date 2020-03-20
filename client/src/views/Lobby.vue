@@ -1,30 +1,32 @@
 <template>
     <div class="lobby">
-        <h1>TebakAku</h1>
-        <form @submit.prevent="joinRoom">
-            <input
-                type="text"
-                placeholder="Enter the room's pin you want to join"
-                v-model="room_code"
-            />
-            <button type="submit" :disabled="room_code.length < 8">Join</button>
-            <br />
+        <div>
+            <h1>TebakAku</h1>
+            <form @submit.prevent="joinRoom">
+                <input
+                    type="text"
+                    placeholder="Enter the room's pin you want to join"
+                    v-model="room_code"
+                />
+                <button type="submit" :disabled="room_code.length < 8">Join</button>
+                <br />
+            </form>
             <p>OR</p>
-            <span @click="isCreateRoom = !isCreateRoom">Create a room</span>
-            <div class="create-room-form" v-if="isCreateRoom">
-                <form @submit.prevent="createRoom">
-                    <input
-                        type="text"
-                        placeholder="Enter the room's name"
-                        v-model="roomsName"
-                    />
-                    <button type="submit" :disabled="roomsName === ''">
-                        Create!
-                    </button>
-                    <br />
-                </form>
-            </div>
-        </form>
+                <span @click="isCreateRoom = !isCreateRoom">Click here to create a room</span>
+                <div class="create-room-form" v-if="isCreateRoom">
+                    <form @submit.prevent="createRoom">
+                        <input
+                            type="text"
+                            placeholder="Enter the room's name"
+                            v-model="roomsName"
+                        />
+                        <button type="submit" :disabled="roomsName === ''">
+                            Create!
+                        </button>
+                        <br />
+                    </form>
+                </div>
+        </div>
     </div>
 </template>
 <script>

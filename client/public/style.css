@@ -23,14 +23,30 @@ body {
     text-align: center; display: flex; justify-content: center; align-items: center; height: 100vh;
     background-color: #3f96cc;
 }
-.home h1{
+.home h1, .lobby h1{
     font-size: 80px; color: whitesmoke
 }
 
-.home input{
+.home input, .lobby input{
     width: 300px; height: 40px; font-size: 23px; margin-right: 20px; padding: 15px 15px; border-radius: 10px;
 }
-.home button{
+.home button, .lobby button{
     width: 200px; height: 70px; font-size: 23px; padding: 15px 15px; background-color: #ffc524; color: whitesmoke;
     font-weight: 500; border-radius: 10px;
+}
+.home button:hover, .lobby button:hover{
+    cursor: pointer;
+}
+.lobby{
+    text-align: center; display: flex; justify-content: center; align-items: center; height: 100vh;
+    background-color: rgb(28, 190, 201)
+}
+.lobby p, .lobby span{
+    font-size: 25px; color: white;
+}
+.lobby span:hover{
+    cursor: pointer;
+}
+.create-room-form{
+    margin-top: 30px;
 }
