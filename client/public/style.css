@@ -1,0 +1,176 @@
+@font-face {
+    font-family: "gotham";
+    src: url(./font/Gotham-Book.otf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "gotham";
+    src: url(./font/Gotham-Medium.otf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "montserrat";
+    src: url(./font/montserrat.regular.ttf);
+    font-weight: 400;
+}
+
+body {
+    margin: 0;
+    font-family: gotham;
+    min-height: 100vh;
+}
+
+.home {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #3f96cc;
+}
+
+.home h1,
+.lobby h1 {
+    font-size: 80px;
+    color: whitesmoke
+}
+
+.home input,
+.lobby input {
+    width: 300px;
+    height: 40px;
+    font-size: 23px;
+    margin-right: 20px;
+    padding: 15px 15px;
+    border-radius: 10px;
+}
+
+.home button,
+.lobby button {
+    width: 200px;
+    height: 70px;
+    font-size: 23px;
+    padding: 15px 15px;
+    background-color: #ffc524;
+    color: whitesmoke;
+    font-weight: 500;
+    border-radius: 10px;
+}
+
+.home button:hover,
+.lobby button:hover {
+    cursor: pointer;
+}
+
+.lobby {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(28, 190, 201)
+}
+
+.lobby p,
+.lobby span {
+    font-size: 25px;
+    color: white;
+}
+
+.lobby span:hover {
+    cursor: pointer;
+}
+
+.create-room-form {
+    margin-top: 30px;
+}
+
+.gameboard {
+    text-align: center;
+    padding-top: 30px;
+    background-color: aquamarine;
+
+}
+
+.gameboard h1 {
+    font-size: 40px;
+}
+
+.room-code {
+    font-family: montserrat;
+    font-size: 40px;
+}
+
+.guess-word-input {
+    margin-bottom: 30px;
+}
+
+.guess-word-input input {
+    width: 200px;
+    height: 20px;
+    padding: 15px 15px;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.guess-word-input button {
+    width: 100px;
+    padding: 15px 15px;
+    font-size: 20px;
+}
+
+.guess-word {
+    font-size: 25px;
+}
+
+.chatbox {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+
+.form-master {
+    background-color: #3f96cc;
+    border-radius: 10px;
+}
+
+.form-player {
+    background-color: #ffc524;
+    border-radius: 10px;
+    /* padding: 5px 15px;
+    width: 45%; */
+}
+
+.input-clue,
+.input-answer {
+    margin: 15px;
+}
+
+.input-clue input,
+.input-answer input {
+    height: 25px;
+}
+
+.input-clue button,
+.input-answer button {
+    margin-top: 5px;
+    width: 100px;
+    height: 55px;
+}
+
+.button-leave button {
+    margin-top: 5px;
+    width: 100px;
+    height: 55px;
+}
+
+.chatMaster {
+    background-color: white;
+    padding-top: 10px;
+    width: 90%;
+    margin: 10px auto;
+    overflow: auto;
+    max-height: 400px;
+}
