@@ -43,6 +43,7 @@ export default new Vuex.Store({
     },
     setOtherPlayers(state, data) {
       delete data[state.myKey]
+      console.log(data)
       state.otherPlayers = data
     },
     setRoomCode(state, data) {

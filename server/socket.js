@@ -25,10 +25,10 @@ io.on('connection', function (socket) {
 
     socket.on('joinRoom', (payload) => {
         RoomController.joinRoom(payload, (err, result) => {
-            console.log(result, 'ini result di socket')
             if (!err) {
                 socket.join(result.name)
                 // io.to(result.data.name).emit('new-player', result.data.player)
+                console.log(result, 'ini result dari socket')
                 socket.emit('gotoRoom', result)
             } else {
                 socket.emit('shootError', err)
@@ -36,4 +36,7 @@ io.on('connection', function (socket) {
         })
     })
 
+    socket.on('newClue', (clue) => {
+        socket.broadcast.emit('newClue', clue)
+    })
 })

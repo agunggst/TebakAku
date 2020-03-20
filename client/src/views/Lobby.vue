@@ -76,7 +76,7 @@ export default {
                 if (data.isCreator) {
                     this.$store.commit('setIsCreator', true);
                 }
-                console.log('yang ini');
+                console.log(data.player);
                 this.$store.commit('setMyKey', data.playerKey);
                 this.$store.commit('setRoomName', data.name);
                 this.$store.commit('setOtherPlayers', data.player);

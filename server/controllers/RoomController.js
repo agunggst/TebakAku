@@ -1,47 +1,7 @@
 const {
     Room
 } = require('../models');
-const kue = require('kue');
-const queue = kue.createQueue();
 const roomCoder = require('../helpers/roomCoder');
-
-queue.process('joinRoom', (job, done) => {
-    const {
-        payload
-    } = job.data;
-    let playerKey;
-
-    Room.findOne({
-            where: {
-                room_code: payload.room_code
-            }
-        })
-        .then(result => {
-            if (result) {
-                let idx = Object.keys(result.player).length;
-                playerKey = `${idx + 1}-${payload.playerName}`;
-                result.player[playerKey] = 0;
-                result.changed('player', true);
-
-                return result.save();
-            } else {
-                throw {
-                    status_code: 404,
-                    message: 'Room Not Found'
-                };
-            }
-        })
-        .then(result => {
-            console.log(result);
-            done(null, {
-                ...result,
-                playerKey
-            });
-        })
-        .catch(err => {
-            done(err);
-        });
-});
 
 class RoomController {
     static createRoom(roomData, callback) {
@@ -91,20 +51,6 @@ class RoomController {
     }
 
     static joinRoom(payload, callback) {
-        // let job = queue
-        //     .create('joinRoom', {
-        //         payload,
-        //         callback
-        //     })
-        //     .save();
-        // job.on('complete', result => {
-        //     callback(null, {
-        //         data: result.dataValues,
-        //         message: 'Success Joining Room'
-        //     });
-        // }).on('failed', err_msg => {
-        //     callback(err_msg, null);
-        // });
 
         let playerKey;
         Room.findOne({

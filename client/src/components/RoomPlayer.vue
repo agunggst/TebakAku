@@ -9,14 +9,17 @@
                     <h3 class="mt-2">Tebakan</h3>
                 </div>
                 <div class="col-sm-8">
-                    <p v-for="(message,i) in messages" :key="i">
-                        <span>{{message.player}}:{{message.message}}</span>
+                    <p v-for="(message, i) in messages" :key="i">
+                        <span>{{ message.player }}:{{ message.message }}</span>
                     </p>
                 </div>
             </div>
-            <div>
+            <div v-if="!$store.state.isCreator">
                 <form @submit.prevent="sendMessage">
-                    <div id="submitplayer" class="form-group border border-dark mt-2 ml-3">
+                    <div
+                        id="submitplayer"
+                        class="form-group border border-dark mt-2 ml-3"
+                    >
                         <label>Tebakan</label>
                         <input
                             type="text"
@@ -25,7 +28,9 @@
                             v-model="message"
                         />
                     </div>
-                    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                    <button type="submit" class="btn btn-primary mb-3">
+                        Submit
+                    </button>
                 </form>
             </div>
         </div>
@@ -34,12 +39,12 @@
 
 <script>
 export default {
-    name: "roomplayer",
+    name: 'roomplayer',
     data() {
         return {
-            messages: [{ player: "Tebakan", message: "silakan tebak" }],
-            player: "",
-            message: ""
+            messages: [{player: 'Tebakan', message: 'silakan tebak'}],
+            player: '',
+            message: ''
         };
     },
     methods: {
