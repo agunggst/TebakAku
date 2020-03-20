@@ -8,6 +8,7 @@ export default new Vuex.Store({
     myName: '',
     myKey: '',
     roomName: '',
+    room_code: '',
     score: 0,
     isCreator: false,
     socket: null,
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     setOtherPlayers(state, data) {
       delete data[state.myKey]
       state.otherPlayers = data
+    },
+    setRoomCode(state, data) {
+      state.room_code = data
     }
   },
   actions: {},

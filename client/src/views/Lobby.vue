@@ -13,8 +13,14 @@
             <span @click="isCreateRoom = !isCreateRoom">Create a room</span>
             <div class="create-room-form" v-if="isCreateRoom">
                 <form @submit.prevent="createRoom">
-                    <input type="text" placeholder="Enter the room's name" v-model="roomsName" />
-                    <button type="submit" :disabled="roomsName === ''">Create!</button>
+                    <input
+                        type="text"
+                        placeholder="Enter the room's name"
+                        v-model="roomsName"
+                    />
+                    <button type="submit" :disabled="roomsName === ''">
+                        Create!
+                    </button>
                     <br />
                 </form>
             </div>
@@ -22,13 +28,13 @@
     </div>
 </template>
 <script>
-import io from "socket.io-client";
-import { mapState, mapMutations } from "vuex";
+import io from 'socket.io-client';
+import {mapState, mapMutations} from 'vuex';
 
 export default {
-    name: "Lobby",
+    name: 'Lobby',
     beforeRouteEnter(to, from, next) {
-        if (localStorage.getItem("name")) {
+        if (localStorage.getItem('name')) {
             next();
         } else {
             next(false);
@@ -36,16 +42,16 @@ export default {
     },
     created() {
         if (this.$store.state.socket === null) {
-            let socket = io("http://localhost:3000");
-            this.$store.commit("setSocket", socket);
+            let socket = io('http://localhost:3000');
+            this.$store.commit('setSocket', socket);
         }
-        this.$store.commit("resetState");
+        this.$store.commit('resetState');
         this.socketListener();
     },
     data() {
         return {
-            room_code: "",
-            roomsName: "",
+            room_code: '',
+            roomsName: '',
             isCreateRoom: false
         };
     },
@@ -55,31 +61,33 @@ export default {
                 playerName: this.$store.state.myName,
                 room_code: this.room_code
             };
-            this.socket.emit("joinRoom", payload);
+            console.log('masuk join');
+            this.socket.emit('joinRoom', payload);
         },
         createRoom() {
             let payload = {
                 name: this.roomsName,
                 creator: this.$store.state.myName
             };
-            this.socket.emit("createRoom", payload);
+            this.socket.emit('createRoom', payload);
         },
         socketListener() {
-            this.socket.on("gotoRoom", data => {
+            this.socket.on('gotoRoom', data => {
                 if (data.isCreator) {
-                    this.$store.commit("setIsCreator", true);
+                    this.$store.commit('setIsCreator', true);
                 }
-                console.log("yang ini");
-                this.$store.commit("setMyKey", data.playerKey);
-                this.$store.commit("setRoomName", data.name);
-                this.$store.commit("setOtherPlayers", data.player);
-                this.$store.commit("setScore", 0);
-                // this.$router.push('/play');
+                console.log('yang ini');
+                this.$store.commit('setMyKey', data.playerKey);
+                this.$store.commit('setRoomName', data.name);
+                this.$store.commit('setOtherPlayers', data.player);
+                this.$store.commit('setScore', 0);
+                this.$store.commit('setRoomCode', data.room_code);
+                this.$router.push('/gameboard');
             });
         }
     },
     computed: {
-        ...mapState(["socket"])
+        ...mapState(['socket'])
     }
 };
 </script>
