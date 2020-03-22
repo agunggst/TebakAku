@@ -62,13 +62,13 @@ export default {
         sendClue() {
             const clue = {
                 username: "Room_Master",
-                message: this.message,
-                roomName: this.$store.state.roomName
+                message: this.message
             };
             if (clue.message == this.secret_word) {
                 this.$myswal.showMessage("GA BOLEH KASIH TAU");
             } else {
                 this.messages.push(clue);
+                clue.roomName = this.$store.state.roomName;
                 this.message = "";
                 this.socket.emit("newClue", clue);
             }

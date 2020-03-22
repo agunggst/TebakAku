@@ -54,10 +54,10 @@ export default {
         sendAnswer() {
             const payload = {
                 player: this.$store.state.myName,
-                message: this.message,
-                roomName: this.$store.state.roomName
+                message: this.message
             };
             this.messages.push(payload);
+            payload.roomName = this.$store.state.roomName;
             this.$emit("checkAnswer", this.message);
             this.socket.emit("sendAnswer", payload);
             // this.message = "";
