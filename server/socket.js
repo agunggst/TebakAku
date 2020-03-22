@@ -37,7 +37,11 @@ io.on('connection', function (socket) {
     })
 
     socket.on('newClue', (clue) => {
-        socket.broadcast.emit('newClue', clue)
+        // socket.broadcast.emit('newClue', clue)
+        io.to(clue.roomName).emit({
+            username: clue.username,
+            message: clue.message,
+        })
     })
 
     socket.on('changeIsPlaying', (payload) => {
@@ -45,7 +49,11 @@ io.on('connection', function (socket) {
     })
 
     socket.on('sendAnswer', (payload) => {
-        socket.broadcast.emit('sendAnswer', payload)
+        // socket.broadcast.emit('sendAnswer', payload)
+        io.to(payload.roomName).emit({
+            player: payload.player,
+            message: payload.message,
+        })
     })
 
     socket.on('endGame', (payload) => {

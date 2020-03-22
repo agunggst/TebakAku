@@ -54,7 +54,8 @@ export default {
         sendAnswer() {
             const payload = {
                 player: this.$store.state.myName,
-                message: this.message
+                message: this.message,
+                roomName: this.$store.state.roomName
             };
             this.messages.push(payload);
             this.$emit("checkAnswer", this.message);
