@@ -60,7 +60,7 @@ export default {
             payload.roomName = this.$store.state.roomName;
             this.$emit("checkAnswer", this.message);
             this.socket.emit("sendAnswer", payload);
-            // this.message = "";
+            this.message = "";
         },
         socketListener() {
             this.socket.on("sendAnswer", payload => {
